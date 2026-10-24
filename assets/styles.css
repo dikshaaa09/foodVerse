@@ -1,0 +1,318 @@
+/* ==========================================================================
+   Food Verse AI - Premium Gastronomic Intelligence Design System
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --color-bg-base: #0b0f19;
+  --color-bg-surface: #151d30;
+  --color-bg-elevated: #1e293b;
+  --color-bg-glass: rgba(21, 29, 48, 0.75);
+  
+  --color-primary: #10b981;
+  --color-primary-glow: rgba(16, 185, 129, 0.25);
+  --color-accent-amber: #f59e0b;
+  --color-accent-rose: #f43f5e;
+  --color-accent-cyan: #06b6d4;
+  --color-accent-indigo: #6366f1;
+  
+  --color-text-main: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-border: rgba(148, 163, 184, 0.12);
+  --color-border-glow: rgba(16, 185, 129, 0.35);
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+  
+  --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px var(--color-primary-glow);
+}
+
+/* Global Streamlit Overrides */
+.stApp {
+  background: radial-gradient(circle at 10% 10%, #111827 0%, #0b0f19 50%, #06090e 100%) !important;
+  font-family: var(--font-main) !important;
+  color: var(--color-text-main) !important;
+}
+
+/* Custom Header Banner */
+.foodverse-hero {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.08) 50%, rgba(99, 102, 241, 0.05) 100%);
+  border: 1px solid var(--color-border-glow);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 2.2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.foodverse-hero::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 30%, #34d399 70%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero-subtitle {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  margin-top: 0.4rem;
+  font-weight: 400;
+  max-width: 850px;
+  line-height: 1.5;
+}
+
+/* Stats Pill Bar */
+.stats-bar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+
+.stat-chip {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.stat-chip strong {
+  color: var(--color-primary);
+}
+
+/* Glassmorphism Cards */
+.food-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: all 0.25s ease-in-out;
+  margin-bottom: 1.2rem;
+}
+
+.food-card:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(16, 185, 129, 0.15);
+}
+
+.food-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Metric Display Cards */
+.macro-box {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.macro-box:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.macro-box-val {
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  margin-top: 0.2rem;
+}
+
+.macro-box-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+/* Health & Freshness Badges */
+.badge-fresh {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-moderate {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-spoiled {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Violation & Hazard Warning Items */
+.hazard-alert {
+  background: rgba(244, 63, 94, 0.08);
+  border-left: 4px solid #f43f5e;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.safe-alert {
+  background: rgba(16, 185, 129, 0.08);
+  border-left: 4px solid #10b981;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Recipe & Meal Planner Elements */
+.step-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+}
+
+.step-number {
+  background: var(--color-primary);
+  color: #0b0f19;
+  font-weight: 800;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Streamlit Tabs Customization */
+button[data-baseweb="tab"] {
+  font-family: var(--font-main) !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  padding: 0.75rem 1.2rem !important;
+  border-radius: var(--radius-sm) !important;
+  transition: all 0.2s ease !important;
+}
+
+button[data-baseweb="tab"]:hover {
+  color: var(--color-primary) !important;
+  background: rgba(16, 185, 129, 0.08) !important;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+  border-bottom: 2px solid #10b981 !important;
+}
+
+/* Sidebar Customization */
+[data-testid="stSidebar"] {
+  background-color: #0d1322 !important;
+  border-right: 1px solid rgba(148, 163, 184, 0.1) !important;
+}
+
+/* File Uploader Customization */
+[data-testid="stFileUploader"] {
+  border: 1px dashed rgba(16, 185, 129, 0.35) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.5rem !important;
+  background: rgba(21, 29, 48, 0.4) !important;
+}
+
+/* Buttons */
+.stButton > button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border: none !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.6rem 1.4rem !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39) !important;
+  transition: all 0.2s ease !important;
+}
+
+.stButton > button:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.55) !important;
+}
+
+/* Score Dial Gauge Accent */
+.score-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  margin: 0 auto;
+  border: 6px solid var(--color-primary);
+  background: rgba(16, 185, 129, 0.08);
+}
