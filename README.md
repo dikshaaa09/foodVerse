@@ -12,6 +12,13 @@ By unifying multimodal computer vision, clinical dietetic formulations, post-har
 
 ---
 
+## 🎥 Working Demo Video (1.5 Min Walkthrough)
+A complete 90-second working demonstration video capturing all 5 core epics in real-time is saved directly in this repository:
+- 🎬 **MP4 High-Def Video:** [`food_verse_ai_demo.mp4`](./food_verse_ai_demo.mp4) *(Duration: 90.1s | H.264)*
+- 🎞️ **Animated WebP Recording:** [`food_verse_ai_demo.webp`](./food_verse_ai_demo.webp) *(High-fidelity web playback)*
+
+---
+
 ## 🎯 Epics & Architecture
 
 ```
