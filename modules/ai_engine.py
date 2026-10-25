@@ -40,7 +40,7 @@ def encode_image_to_base64(image: Image.Image) -> str:
 class FoodVerseAIEngine:
     def __init__(self, api_provider="Gemini", api_key=None, demo_mode=True):
         self.api_provider = api_provider
-        self.api_key = api_key or os.environ.get("GEMINI_API_KEY", "") or os.environ.get("GROQ_API_KEY", "")
+        self.api_key = (api_key or os.environ.get("GEMINI_API_KEY", "") or os.environ.get("GROQ_API_KEY", "")).strip()
         self.demo_mode = demo_mode or not bool(self.api_key)
 
     def analyze_image_with_prompt(self, image: Image.Image, prompt: str, task_type: str = "general") -> dict:
@@ -58,34 +58,26 @@ class FoodVerseAIEngine:
                 
                 client = genai.Client(api_key=self.api_key)
                 
-                # Convert image to bytes for genai
-                buffered = BytesIO()
-                if image.mode in ("RGBA", "P"):
-                    img_rgb = image.convert("RGB")
-                else:
-                    img_rgb = image
-                img_rgb.save(buffered, format="JPEG")
-                img_bytes = buffered.getvalue()
+                img_rgb = image.convert("RGB") if image.mode in ("RGBA", "P") else image
 
-                # Call gemini-2.5-flash or gemini-1.5-flash
-                models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-pro"]
+                # Call modern Gemini models
+                models_to_try = ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-flash-latest"]
+                last_err = None
                 for model_name in models_to_try:
                     try:
                         response = client.models.generate_content(
                             model=model_name,
-                            contents=[
-                                types.Part.from_bytes(data=img_bytes, mime_type="image/jpeg"),
-                                prompt
-                            ]
+                            contents=[img_rgb, prompt]
                         )
                         if response.text:
                             return extract_json_from_response(response.text)
                     except Exception as model_err:
+                        last_err = str(model_err)
                         continue
                 
                 # If all failed, return fallback with notification
                 res = self._generate_fallback_response(prompt, task_type, image)
-                res["_api_notice"] = "Live Gemini request failed (quota or auth). Displaying demonstration intelligence contract."
+                res["_api_notice"] = f"Live Gemini request failed ({last_err or 'quota or auth'}). Displaying demonstration intelligence contract."
                 return res
 
             except Exception as e:
@@ -143,12 +135,16 @@ class FoodVerseAIEngine:
             try:
                 from google import genai
                 client = genai.Client(api_key=self.api_key)
-                response = client.models.generate_content(
-                    model="gemini-2.5-flash",
-                    contents=prompt
-                )
-                if response.text:
-                    return extract_json_from_response(response.text)
+                for model_name in ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-flash-latest"]:
+                    try:
+                        response = client.models.generate_content(
+                            model=model_name,
+                            contents=prompt
+                        )
+                        if response.text:
+                            return extract_json_from_response(response.text)
+                    except Exception:
+                        continue
             except Exception:
                 pass
 
